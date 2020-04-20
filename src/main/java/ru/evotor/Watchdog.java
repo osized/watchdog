@@ -1,7 +1,6 @@
 package ru.evotor;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -15,14 +14,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +45,6 @@ class Watchdog {
         try {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
-                // return it as a String
                 JSONObject jsonResponse = new JSONObject(EntityUtils.toString(entity));
                 Optional<String> stuckAppId = getStuckAppId(jsonResponse);
                 if (stuckAppId.isPresent()) {
